@@ -24,8 +24,9 @@
 	</script>
 </head>
 <body>
-
-	<audio id="musicStar" src="renxi.mp3" autoplay="true" preload="auto" loop="loop"></audio>
+		<div class="div_btn" id="div_music" onclick="music_switch()"> <!-- 音乐按钮部分 -->
+ 			<audio id="audio_music" src="renxi.mp3" autoplay="true" preload="auto" loop="loop"></audio>
+                </div>
 <div id="main">
   <div id="error">本页面采用HTML5编辑，目前您的浏览器无法显示，请换成谷歌(Chrome)或者火狐(Firefox)浏览器，或者其他游览器的最新版本。by子成君</div>
   <div id="wrap">
@@ -51,16 +52,27 @@
   </div>
 </div>
 <script>
-	function audioAutoPlay(id){
-        var audio = document.getElementById(id);
-        var play = function(){
-            audio.play();
-            audio.pause();
-            document.removeEventListener("touchstart",play, false);
-        };
-        audio.play();
-        document.addEventListener("touchstart",play, false);
-}
+        //鎺у埗闊充箰鍒囨崲鎾斁鏆傚仠 
+        var img_music=document.getElementById('img_music');
+        var timeout_music;
+        function music_switch(){ //鍒囨崲   
+            clearTimeout(timeout_music);  
+            if(audio_music.paused){
+                console.log('switch music to play');
+                audio_music.play();
+                audio_record.pause(); //鎾斁闊充箰鏃跺綍闊充竴瀹氭殏鍋�                
+                img_music.style.webkitAnimation="music_play_rotate 1s linear infinite";
+                $(".div_music_tips").html("姝ｆ挱鏀�").show();                
+                timeout_music=setTimeout(function(){$(".div_music_tips").hide()}, 2500);
+            }else{
+                console.log('switch music to paused'); 
+                audio_music.pause();
+                // audio_record.play(); //
+                img_music.style.webkitAnimation="";
+                $(".div_music_tips").html("宸叉殏鍋�").show();  
+                timeout_music=setTimeout(function(){$(".div_music_tips").hide()}, 2500); 
+            } 
+        }
     </script>
 <script>
     (function(){
