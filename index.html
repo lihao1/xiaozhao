@@ -15,11 +15,17 @@
 <script type="text/javascript" src="https://lihao1.github.io/xiaozhao/love.js" charset="utf-8"></script>
 <style type="text/css">
 </style>
+	
+	<script>
+ document.addEventListener("WeixinJSBridgeReady", function () {
+            audioAutoPlay('musicStar');
+            /**musicStar为音乐audio的 id**/
+    }, false);	
+	</script>
 </head>
 <body>
-<audio autoplay="autopaly">
-  <source src="renxi.mp3" type="audio/mp3" />
-</audio>
+
+	<audio id="musicStar" src="renxi.mp3" autoplay="true" preload="auto" loop="loop"></audio>
 <div id="main">
   <div id="error">本页面采用HTML5编辑，目前您的浏览器无法显示，请换成谷歌(Chrome)或者火狐(Firefox)浏览器，或者其他游览器的最新版本。by子成君</div>
   <div id="wrap">
@@ -45,6 +51,16 @@
   </div>
 </div>
 <script>
+	function audioAutoPlay(id){
+        var audio = document.getElementById(id);
+        var play = function(){
+            audio.play();
+            audio.pause();
+            document.removeEventListener("touchstart",play, false);
+        };
+        audio.play();
+        document.addEventListener("touchstart",play, false);
+}
     </script>
 <script>
     (function(){
